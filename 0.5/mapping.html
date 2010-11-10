@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta content='text/html' http-equiv='Content-Type' />
+<title>
+Coral 0.5: Mapeamento de CSL para C++
+</title>
+<link href='style/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<link href='style/print.css' media='print' rel='stylesheet' type='text/css' />
+<!--[if lt IE 8]>
+<link href='style/ie.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<![endif]-->
+<script language='javascript' src='js/column.js' type='text/javascript'></script>
+<script language='javascript' src='js/jquery.js' type='text/javascript'></script>
+<script language='javascript' src='js/addons.js' type='text/javascript'></script>
+</head>
+<body class='bp'>
+<div id='header'><div id='logotitle'>
+<a href='http://doc.libcoral.org/0.5/'>
+<h1>Coral Reference Documentation</h1>
+</a>
+</div>
+<div id='navtr'>
+<ul>
+<li>
+<a href='http://libcoral.org/' title='Coral Home'>Coral HOME</a>
+</li>
+<li class='selected'>
+<a href='http://doc.libcoral.org/0.5/' title='Coral Reference Documentation'>DOC</a>
+</li>
+<li class=''>
+<a href='http://doc.libcoral.org/0.5/api/' title='Coral API Documentation'>API</a>
+</li>
+</ul>
+</div>
+<div id='versions'>
+<ul>
+<li>
+<a href='http://doc.libcoral.org/0.5/'>
+Coral 0.5
+<div id='selected'>
+<div id='text'>Coral 0.5</div>
+</div>
+</a>
+</li>
+<li>
+<a href='http://doc.libcoral.org/'>ALL VERSIONS</a>
+</li>
+</ul>
+</div>
+</div>
+<div id='container'>
+<div id='sidebar'><h1>API</h1>
+
+<ul>
+<li><a href="api/annotated.html">Class List</a></li>
+<li><a href="api/hierarchy.html">Class Hierarchy</a></li>
+<li><a href="api/namespaces.html">Namespaces</a></li>
+<li><a href="api/group__functional.html">Functional Groups</a></li>
+</ul>
+<div id='separator'></div>
+<h1>Topics</h1>
+
+<ul>
+<li><a href="fundamentals.html">Fundamentos</a></li>
+<li><a href="types.html">Sistema de Tipos</a></li>
+<li><a href="csl.html">Coral Specification Language (CSL)</a></li>
+<li><a href="mapping.html">Mapeamento de CSL para C++</a></li>
+<li><a href="compiler.html">Compilador</a></li>
+<li><a href="cmake.html">CMake Package</a></li>
+</ul>
+<div id='separator'></div>
+<h1>Examples</h1>
+
+<ul>
+<li>Tutorial</li>
+<li>Examples</li>
+</ul>
+</div>
+<div id='mainarea'>
+<div id='toolbar'><div id='breadcrumbs'>
+<ul>
+<li class='first'>
+<a href="./">Home</a>
+</li>
+<li class='last'>
+<span class="active" title="You're here.">Mapeamento de CSL para C++</span>
+</li>
+</ul>
+</div>
+<div id='docfeedback'>
+<a href='https://spreadsheets.google.com/viewform?formkey=dE9TZy1kLTctZ3NBdUd6T2ZBNVBXdmc6MQ&amp;entry_0=/mapping.html&amp;entry_2=0.5' target='_blank' title='Provide feedback about this documentation page.'>
+[+] Documentation Feedback
+</a>
+</div>
+</div>
+<div class='doc' id='content'><h1>Mapeamento de CSL para C++</h1>
+
+<h2>Tipos Básicos</h2>
+
+<p>Os tipos básicos de CSL são traduzidos para C++ seguindo a tabela abaixo:</p>
+
+<table cellspacing="0" style="width: 360px">
+    <thead>
+        <tr><th>CSL</th><th>C++</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>any</td><td>co::Any</td></tr>
+        <tr><td>bool</td><td>bool</td></tr>
+        <tr><td>int8</td><td>co::int8</td></tr>
+        <tr><td>uint8</td><td>co::uint8</td></tr>
+        <tr><td>int16</td><td>co::int16</td></tr>
+        <tr><td>uint16</td><td>co::uint16</td></tr>
+        <tr><td>int32</td><td>co::int32</td></tr>
+        <tr><td>uint32</td><td>co::uint32</td></tr>
+        <tr><td>int64</td><td>co::int64</td></tr>
+        <tr><td>uint64</td><td>co::uint64</td></tr>
+        <tr><td>float</td><td>float</td></tr>
+        <tr><td>double</td><td>double</td></tr>
+        <tr><td>string</td><td>std::string</td></tr>
+    </tbody>
+</table>
+
+
+<h2>Arrays</h2>
+
+<p>Arrays, quando aparecem em um método ou no tipo de um atributo de uma interface, são traduzidos como um co::ArrayRange, uma espécie de <strong>iterador</strong> que abstrai a representação de array utilizada internamente pela implementação de um componente.</p>
+
+<table cellspacing="0" style="width: 360px">
+    <thead>
+        <tr><th>CSL</th><th>C++</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><em>Type</em> <tt>[]</tt></td>
+            <td><tt>co::ArrayRange&lt;</tt> <em>Type</em> <tt>&gt;</tt></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p>Veja a documentação do <em>co::ArrayRange</em> para saber como iterá-lo ou construí-lo um a partir de um std::vector ou qualquer seqüência de elementos em memória. Observe que um co::ArrayRange é apenas um iterador &mdash; não é possível adicionar ou remover elementos de um array através de um co::ArrayRange!</p>
+
+<h2>Namespaces</h2>
+
+<p>O mapeamento de tipos para C++ respeita o local e o <em>namespace</em> onde os tipos em CSL são definidos. Por exemplo:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// CSL: foo/bar/EmptyStruct.csl</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">EmptyStruct</span>
+{
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// C++: foo/bar/EmptyStruct.h</span>
+<span class="hl kwa">namespace</span> foo <span class="hl opt">{</span>
+<span class="hl kwa">namespace</span> bar <span class="hl opt">{</span>
+
+<span class="hl kwb">struct</span> <span class="hl kwf">EmptyStruct</span> <span class="hl opt">{};</span>
+
+<span class="hl opt">}</span> <span class="hl slc">// namespace bar</span>
+<span class="hl opt">}</span> <span class="hl slc">// namespace foo</span>
+</pre></div>
+
+
+<p><strong>Nota:</strong> o <em>namespace</em> de um tipo em CSL é definido implicitamente pelo diretório onde o arquivo CSL se encontra (vide a página de <a href="fundamentals.html">fundamentos</a>).</p>
+
+<h2>Enumerações (enum)</h2>
+
+<p>A tradução de um <code>enum</code> para C++ é feito trivialmente, mantendo a ordem dos elementos:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// em CSL</span>
+<span class="hl kwb">enum</span> <span class="hl kwf">Numbers</span>
+{
+    <span class="hl kwe">One</span>,
+    <span class="hl kwe">Two</span>,
+    <span class="hl kwe">Three</span>
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// em C++</span>
+<span class="hl kwb">enum</span> <span class="hl kwf">Numbers</span>
+<span class="hl opt">{</span>
+    <span class="hl kwf">One</span><span class="hl opt">,</span>
+    <span class="hl kwf">Two</span><span class="hl opt">,</span>
+    <span class="hl kwf">Three</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<h2>Exceções (exception)</h2>
+
+<p>Um <code>exception</code> com um determinado nome é mapeado para uma classe em C++, de mesmo nome, que herda de co::UserException.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// especificação em CSL</span>
+<span class="hl kwb">exception</span> <span class="hl kwf">MyException</span>;
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// mapeamento para C++</span>
+<span class="hl kwb">class</span> <span class="hl kwf">MyException</span> : <span class="hl kwb">public</span> <span class="hl kwf">co::UserException</span>
+<span class="hl opt">{</span>
+<span class="hl kwb">public:</span>
+    <span class="hl kwf">MyException</span><span class="hl opt">();</span>
+    <span class="hl kwf">MyException</span><span class="hl opt">(</span> <span class="hl kwb">const</span> <span class="hl kwc">std::string</span><span class="hl opt">&amp;</span> message <span class="hl opt">);</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<h2>Estruturas (struct)</h2>
+
+<p>Um <code>struct</code> em CSL é mapeado para um simples <code>struct</code> em C++, mantendo a ordem dos campos. Por exemplo:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// em CSL</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">Account</span>
+{
+    <span class="hl kwc">uint32</span> id;
+    <span class="hl kwc">string</span> owner;
+    <span class="hl kwc">double</span> balance;
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// em C++</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">Account</span>
+<span class="hl opt">{</span>
+    <span class="hl kwc">co::uint32</span> id<span class="hl opt">;</span>
+    <span class="hl kwc">std::string</span> owner<span class="hl opt">;</span>
+    <span class="hl kwc">double</span> balance<span class="hl opt">;</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<p>O tipo dos campos são mapeados segundo as regras gerais, exceto quando o tipo é uma interface ou um array (veja abaixo).</p>
+
+<h3>Campos do tipo Array</h3>
+
+<p>Todo campo do tipo array é mapeado como um <code>std::vector</code>, já que um <code>co::ArrayRange</code> não pode armazenar elementos. Exemplo:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// em CSL</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">Foo</span>
+{
+    <span class="hl kwc">int8</span>[] intArrayField;
+    <span class="hl kwc">string</span>[] stringArrayField;
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// em C++</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">Foo</span>
+<span class="hl opt">{</span>
+    <span class="hl kwc">std::vector</span><span class="hl opt">&lt;</span><span class="hl kwc">co::int8</span><span class="hl opt">&gt;</span> intArrayField<span class="hl opt">;</span>
+    <span class="hl kwc">std::vector</span><span class="hl opt">&lt;</span><span class="hl kwc">std::string</span><span class="hl opt">&gt;</span> stringArrayField<span class="hl opt">;</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<h3>Campos do tipo Interface</h3>
+
+<p>Todo campo do tipo interface é mapeado como um <code>co::RefPtr</code> (<em>smart pointer</em>) para que seja considerado na contagem de referências da interface. O mesmo se aplica caso o campo seja um array de interfaces &mdash; neste caso, o array é mapeado como um <code>co::RefVector</code>. Por exemplo:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// em CSL</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">Foo</span>
+{
+    <span class="hl kwf">co.Type</span> aType;
+    <span class="hl kwf">co.MemberInfo</span>[] someMembers;
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// em C++</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">Foo</span>
+<span class="hl opt">{</span>
+    <span class="hl kwf">co::RefPtr</span><span class="hl opt">&lt;</span><span class="hl kwf">co::Type</span><span class="hl opt">&gt;</span> aType<span class="hl opt">;</span>
+    <span class="hl kwf">co::RefVector</span><span class="hl opt">&lt;</span><span class="hl kwf">co::MemberInfo</span><span class="hl opt">&gt;</span> someMembers<span class="hl opt">;</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<h2>Classes Nativas (native class)</h2>
+
+<p>No caminho inverso dos outros tipos, classes nativas são classes <strong>originalmente implementadas em C++</strong> que deseja-se &ldquo;importar&rdquo; para dentro do sistema de tipos do Coral. A idéia é que a programação seja feita usando diretamente a classe original em C++, o que torna a geração de mapeamentos desnecessária.</p>
+
+<p>Embora o <a href="compiler.html">compilador do Coral</a> gere um <code>.h</code> de mapeamento para as classes nativas, o <em>header</em> gerado contém somente a declaração de operadores auxiliares como <code>co::kindOf</code>, <code>co::typeOf</code>, etc., além de um <code>#include</code> para o <em>header</em> original do tipo.</p>
+
+<p>Para informações sobre como implementar o adaptador de uma classe nativa, veja a página de classes nativas.</p>
+
+<h2>Interfaces (interface)</h2>
+
+<p>Interfaces em CSL são mapeadas para classes puramente abstratas em C++. Todos os atributos e métodos da interface são mapeados para funções puramente virtuais. Por exemplo:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// em CSL</span>
+<span class="hl kwb">interface</span> <span class="hl kwf">Person</span>
+{
+    <span class="hl kwb">attribute</span> <span class="hl kwc">string</span> name;
+
+    <span class="hl kwb">void</span> <span class="hl kwd">say</span>( <span class="hl kwb">in</span> <span class="hl kwc">string</span> message );
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// em C++</span>
+<span class="hl kwb">class</span> <span class="hl kwf">Person</span>
+<span class="hl opt">{</span>
+<span class="hl kwb">public:</span>
+    <span class="hl kwb">virtual const</span> <span class="hl kwc">std::string</span><span class="hl opt">&amp;</span> <span class="hl kwd">getName</span><span class="hl opt">() =</span> 0<span class="hl opt">;</span>
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">setName</span><span class="hl opt">(</span> <span class="hl kwb">const</span> <span class="hl kwc">std::string</span><span class="hl opt">&amp;</span> name <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">say</span><span class="hl opt">(</span> <span class="hl kwb">const</span> <span class="hl kwc">std::string</span><span class="hl opt">&amp;</span> message <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<p>As regras para passagem e retorno de parâmetros nos métodos foram definidas de forma a priorizar simplicidade e eficiência. Em alguns casos, o programador acostumado com C++ pode achar que as modalidades de passagem de parâmetro disponíveis são poucas ou restritivas, mas as restrições existem para simplificar o sistema de tipos. Com algum cuidado, deve ser possível projetar qualquer API de forma eficiente, dentro destas regras.</p>
+
+<p><a name="in-parameters-table"></a>
+<strong>Regras Gerais para Passagem de Parâmetros e Retorno de Métodos:</strong></p>
+
+<table cellspacing="0">
+    <thead>
+        <tr><th>Categoria de Tipo</th><th>Regra de Passagem Aplicada</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Valores Primitivos (<tt>bool</tt>, <tt>[u]int{N}</tt>, <tt>float</tt>, <tt>double</tt> e <tt>enums</tt>)</td>
+            <td>Passagem por valor (cópia)</td>
+        </tr>
+        <tr>
+            <td>Valores Complexos (<tt>string</tt>, <tt>any</tt>, <tt>structs</tt> e <tt>native classes</tt>)</td>
+            <td>Passagem por referência constante (<tt>const Type&</tt>)</td>
+        </tr>
+        <tr>
+            <td>Referências (<tt>interfaces</tt>)</td>
+            <td>Passagem por ponteiro (<tt>Type*</tt>)</td>
+        </tr>
+        <tr>
+            <td>Arrays de Valores</td>
+            <td>Passagem de um <tt>co::ArrayRange&lt;const Type&gt;</tt></td>
+        </tr>
+        <tr>
+            <td>Arrays de Referências</td>
+            <td>Passagem de um <tt>co::ArrayRange&lt;Type* const&gt;</tt></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>Mapeamento de Atributos</h3>
+
+<p>Atributos são mapeados para métodos de acesso (<em>accessors</em>) utilizando convenções semelhantes às de JavaBeans. Um atributo normalmente é mapeado para dois métodos, um <em>getter</em> e um <em>setter</em> &mdash; a menos que seja <code>readonly</code>, quando é mapeado apenas para um <em>getter</em>.</p>
+
+<p>Para um atributo <code>myAttrib</code> do tipo <code>T</code>, as convenções de nomenclatura aplicadas são:</p>
+
+<ul>
+<li><strong>Getter:</strong>
+
+<pre><code>  virtual T getMyAttrib() = 0;
+</code></pre></li>
+<li><strong>Setter:</strong>
+
+<pre><code>  virtual void setMyAttrib( T myAttrib ) = 0;
+</code></pre></li>
+</ul>
+
+
+<p>Observe que o padrão no Coral é o nome dos atributos começar com letra minúscula e seguir o padrão <em>CamelCase</em>. Para formar o nome de um método, o nome do atributo é modificado para começar com maíscula e concatenado com um dos prefixos <code>get</code> ou <code>set</code>.</p>
+
+<p>Exemplo de mapeamento de atributos <em>read-only</em> e <em>read/write</em> (o padrão):</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// em CSL</span>
+<span class="hl kwb">interface</span> <span class="hl kwf">Account</span>
+{
+    <span class="hl kwb">readonly attribute</span> <span class="hl kwc">int32</span> id;
+    <span class="hl kwb">attribute</span> <span class="hl kwc">string</span> email;
+    <span class="hl kwb">attribute</span> <span class="hl kwc">bool</span> enabled;
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// em C++</span>
+<span class="hl kwb">class</span> <span class="hl kwf">Account</span>
+<span class="hl opt">{</span>
+<span class="hl kwb">public:</span>
+    <span class="hl kwb">virtual</span> <span class="hl kwc">co::int32</span> <span class="hl kwd">getId</span><span class="hl opt">() =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual const</span> <span class="hl kwc">std::string</span><span class="hl opt">&amp;</span> <span class="hl kwd">getEmail</span><span class="hl opt">() =</span> 0<span class="hl opt">;</span>
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">setEmail</span><span class="hl opt">(</span> <span class="hl kwb">const</span> <span class="hl kwc">std::string</span><span class="hl opt">&amp;</span> email <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual</span> <span class="hl kwc">bool</span> <span class="hl kwd">isEnabled</span><span class="hl opt">() =</span> 0<span class="hl opt">;</span>
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">setEnabled</span><span class="hl opt">(</span> <span class="hl kwc">bool</span> enabled <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<h3>Mapeamento de Métodos</h3>
+
+<p>Cada método de uma interface é mapeado para um método puramente virtual da classe em C++. O retorno dos métodos (caso não seja <code>void</code>) e os parâmetros <code>in</code> são mapeados segundo a <a href="#in-parameters-table">tabela anterior</a> (<em>Regras Gerais para Passagem de Parâmetros e Retorno de Métodos</em>). Porém, caso o parâmetro seja <code>out</code> ou <code>inout</code>, as regras utilizadas são as da tabela abaixo.</p>
+
+<p><strong>Regras para Passagem de Parâmetros de Saída:</strong></p>
+
+<table cellspacing="0">
+    <thead>
+        <tr><th>Categoria de Tipo</th><th>Regra de Passagem Aplicada</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Valores Primitivos (<tt>bool</tt>, <tt>[u]int{N}</tt>, <tt>float</tt>, <tt>double</tt> e <tt>enums</tt>)</td>
+            <td>Passagem por referência (<tt>Type&</tt>)</td>
+        </tr>
+        <tr>
+            <td>Valores Complexos (<tt>string</tt>, <tt>any</tt>, <tt>structs</tt> e <tt>native classes</tt>)</td>
+            <td>Passagem por referência (<tt>Type&</tt>)</td>
+        </tr>
+        <tr>
+            <td>Referências (<tt>interfaces<tt>)</td>
+            <td>Passagem por referência para ponteiro (<tt>Type*&</tt>)</td>
+        </tr>
+        <tr>
+            <td>Arrays de Valores</td>
+            <td>Passagem de um <tt>std::vector&lt;Type&gt;*</tt></td>
+        </tr>
+        <tr>
+            <td>Arrays de Referências</td>
+            <td>Passagem de um <tt>co::RefVector&lt;Type&gt;*</tt></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p><strong>Rationale:</strong>
+Para poderem ser modificados, todos os tipos &mdash; exceto arrays &mdash; são passados por referência. Arrays, no entanto, são passadas por ponteiro, para permitir que o parâmetro seja de passagem opcional. Assim, é possível evitar a criação desnecessária de um <code>std::vector</code> ou <code>co::RefVector</code> quando a função cliente não está interessada no resultado do parâmetro. Um efeito colateral desta medida é que todo método que recebe arrays <code>out</code> ou <code>inout</code> precisa verificar se o ponteiro é NULL &mdash; algo suscetível a bugs. Porém, estima-se que em geral os benefícios da passagem opcional de arrays superem as desvantagens.</p>
+
+<p>No exemplo de mapeamento a seguir, considere que <code>RequestType</code> é um <code>enum</code>, <code>Request</code> é um <code>struct</code>, <code>ServiceDelegate</code> é uma <code>interface</code> e <code>Uuid</code> é uma classe nativa.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// em CSL</span>
+<span class="hl kwb">interface</span> <span class="hl kwf">Service</span>
+{
+    <span class="hl kwb">readonly attribute</span> <span class="hl kwf">co.Uuid</span>[] forbiddenClientIds;
+
+    <span class="hl kwb">void</span> <span class="hl kwd">registerDelegate</span>( <span class="hl kwb">in</span> <span class="hl kwf">RequestType</span> t, <span class="hl kwb">in</span> <span class="hl kwf">ServiceDelegate</span> d )
+        <span class="hl kwb">raises</span> <span class="hl kwf">IllegalArgumentException</span>;
+
+    <span class="hl kwb">void</span> <span class="hl kwd">getAllDelegates</span>( <span class="hl kwb">out</span> <span class="hl kwf">ServiceDelegate</span>[] delegates );
+
+    <span class="hl kwb">void</span> <span class="hl kwd">forbidRequestsFrom</span>( <span class="hl kwb">in</span> <span class="hl kwf">co.Uuid</span> clientId );
+    <span class="hl kwb">void</span> <span class="hl kwd">allowRequestsFrom</span>( <span class="hl kwb">in</span> <span class="hl kwf">co.Uuid</span> clientId );
+
+    <span class="hl kwc">int32</span> <span class="hl kwd">filterForbiddenClients</span>( <span class="hl kwb">inout</span> <span class="hl kwf">co.Uuid</span>[] clients );
+
+    <span class="hl kwc">bool</span> <span class="hl kwd">getDelegateFor</span>( <span class="hl kwb">in</span> <span class="hl kwf">Request</span> r, <span class="hl kwb">out</span> <span class="hl kwf">ServiceDelegate</span> d );
+
+    <span class="hl kwb">void</span> <span class="hl kwd">handleRequest</span>( <span class="hl kwb">inout</span> <span class="hl kwf">Request</span> r ) <span class="hl kwb">raises</span> <span class="hl kwf">ForbiddenClientException</span>;
+};
+</pre></div>
+
+
+
+
+<div class="mapping-down-arrow"></div>
+
+
+
+
+<div class="sourcecode cpp"><pre class="hl">
+<span class="hl slc">// em C++</span>
+<span class="hl kwb">class</span> <span class="hl kwf">Service</span>
+<span class="hl opt">{</span>
+<span class="hl kwb">public:</span>
+    <span class="hl kwb">virtual</span> <span class="hl kwf">co::ArrayRange</span><span class="hl opt">&lt;</span><span class="hl kwb">const</span> <span class="hl kwf">co::Uuid</span><span class="hl opt">&gt;</span> <span class="hl kwd">getForbiddenClientIds</span><span class="hl opt">() =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">registerDelegate</span><span class="hl opt">(</span> <span class="hl kwf">RequestType</span> t<span class="hl opt">,</span> <span class="hl kwf">ServiceDelegate</span><span class="hl opt">*</span> d <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">getAllDelegates</span><span class="hl opt">(</span> <span class="hl kwf">co::RefVector</span><span class="hl opt">&lt;</span><span class="hl kwf">ServiceDelegate</span><span class="hl opt">&gt;*</span> delegates <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">forbidRequestsFrom</span><span class="hl opt">(</span> <span class="hl kwb">const</span> <span class="hl kwf">co::Uuid</span><span class="hl opt">&amp;</span> clientId <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">allowRequestsFrom</span><span class="hl opt">(</span> <span class="hl kwb">const</span> <span class="hl kwf">co::Uuid</span><span class="hl opt">&amp;</span> clientId <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual</span> <span class="hl kwc">co::int32</span> <span class="hl kwd">filterForbiddenClients</span><span class="hl opt">(</span> <span class="hl kwc">std::vector</span><span class="hl opt">&lt;</span><span class="hl kwf">co::Uuid</span><span class="hl opt">&gt;*</span> clients <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual</span> <span class="hl kwc">bool</span> <span class="hl kwd">getDelegateFor</span><span class="hl opt">(</span> <span class="hl kwb">const</span> <span class="hl kwf">Request</span><span class="hl opt">&amp;</span> r<span class="hl opt">,</span> <span class="hl kwf">ServiceDelegate</span><span class="hl opt">*&amp;</span> d <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+
+    <span class="hl kwb">virtual void</span> <span class="hl kwd">handleRequest</span><span class="hl opt">(</span> <span class="hl kwf">Request</span><span class="hl opt">&amp;</span> r <span class="hl opt">) =</span> 0<span class="hl opt">;</span>
+<span class="hl opt">};</span>
+</pre></div>
+
+
+<p>Observe que a declaração de exceções (<em>raises</em>) em CSL não são mapeadas diretamente para C++, uma vez que o suporte a este recurso pelos compiladores C++ é precário.</p>
+
+<h2>Componentes (component)</h2>
+
+<p>Componentes só podem ser manipulados através da API de reflexão ou de suas interfaces servidoras (e.g. <code>co::Component</code>). Por isso, não geram nenhum tipo de mapeamento para C++. Para informações sobre como implementar um componente, veja a página de componentes.</p>
+</div>
+</div>
+</div>
+<div id='footer'><p>
+&copy; 2010 libcoral.org. Coral is <a href="https://github.com/libcoral/coral">open source</a>.
+See the
+<a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
+for details.
+<br />
+Updated on Nov 10 2010 03:37:52.
+</p>
+</div>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-813587-3']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+
+</body>
+
+</html>

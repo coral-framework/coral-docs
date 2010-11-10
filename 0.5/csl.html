@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta content='text/html' http-equiv='Content-Type' />
+<title>
+Coral 0.5: Coral Specification Language (CSL)
+</title>
+<link href='style/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<link href='style/print.css' media='print' rel='stylesheet' type='text/css' />
+<!--[if lt IE 8]>
+<link href='style/ie.css' media='screen, projection' rel='stylesheet' type='text/css' />
+<![endif]-->
+<script language='javascript' src='js/column.js' type='text/javascript'></script>
+<script language='javascript' src='js/jquery.js' type='text/javascript'></script>
+<script language='javascript' src='js/addons.js' type='text/javascript'></script>
+</head>
+<body class='bp'>
+<div id='header'><div id='logotitle'>
+<a href='http://doc.libcoral.org/0.5/'>
+<h1>Coral Reference Documentation</h1>
+</a>
+</div>
+<div id='navtr'>
+<ul>
+<li>
+<a href='http://libcoral.org/' title='Coral Home'>Coral HOME</a>
+</li>
+<li class='selected'>
+<a href='http://doc.libcoral.org/0.5/' title='Coral Reference Documentation'>DOC</a>
+</li>
+<li class=''>
+<a href='http://doc.libcoral.org/0.5/api/' title='Coral API Documentation'>API</a>
+</li>
+</ul>
+</div>
+<div id='versions'>
+<ul>
+<li>
+<a href='http://doc.libcoral.org/0.5/'>
+Coral 0.5
+<div id='selected'>
+<div id='text'>Coral 0.5</div>
+</div>
+</a>
+</li>
+<li>
+<a href='http://doc.libcoral.org/'>ALL VERSIONS</a>
+</li>
+</ul>
+</div>
+</div>
+<div id='container'>
+<div id='sidebar'><h1>API</h1>
+
+<ul>
+<li><a href="api/annotated.html">Class List</a></li>
+<li><a href="api/hierarchy.html">Class Hierarchy</a></li>
+<li><a href="api/namespaces.html">Namespaces</a></li>
+<li><a href="api/group__functional.html">Functional Groups</a></li>
+</ul>
+<div id='separator'></div>
+<h1>Topics</h1>
+
+<ul>
+<li><a href="fundamentals.html">Fundamentos</a></li>
+<li><a href="types.html">Sistema de Tipos</a></li>
+<li><a href="csl.html">Coral Specification Language (CSL)</a></li>
+<li><a href="mapping.html">Mapeamento de CSL para C++</a></li>
+<li><a href="compiler.html">Compilador</a></li>
+<li><a href="cmake.html">CMake Package</a></li>
+</ul>
+<div id='separator'></div>
+<h1>Examples</h1>
+
+<ul>
+<li>Tutorial</li>
+<li>Examples</li>
+</ul>
+</div>
+<div id='mainarea'>
+<div id='toolbar'><div id='breadcrumbs'>
+<ul>
+<li class='first'>
+<a href="./">Home</a>
+</li>
+<li class='last'>
+<span class="active" title="You're here.">Coral Specification Language (CSL)</span>
+</li>
+</ul>
+</div>
+<div id='docfeedback'>
+<a href='https://spreadsheets.google.com/viewform?formkey=dE9TZy1kLTctZ3NBdUd6T2ZBNVBXdmc6MQ&amp;entry_0=/csl.html&amp;entry_2=0.5' target='_blank' title='Provide feedback about this documentation page.'>
+[+] Documentation Feedback
+</a>
+</div>
+</div>
+<div class='doc' id='content'><h1>Coral Specification Language (CSL)</h1>
+
+<h2>Visão Geral</h2>
+
+<p>A linguagem CSL (de <em>Coral Specification Language</em>) é uma forma de especificar interfaces e componentes no Coral. A linguagem permite a especificação de novos tipos, segundo o <a href="types.html">sistema de tipos</a> do Coral, e ainda auxilia na implementação de componentes estáticos.</p>
+
+<p>Os tipos especificados em CSL são mapeados para C++ segundo as regras de <a href="mapping.html">mapeamento de CSL para C++</a>, utilizando o <a href="compiler.html">compilador do Coral</a>.</p>
+
+<h2>Exemplos Básicos</h2>
+
+<p>A linguagem CSL permite seis tipos de especificações:</p>
+
+<ul>
+<li><strong>enum</strong> - uma enumeração de identificadores constantes, com valores implícitos de 0 a (n-1).</li>
+<li><strong>exception</strong> - uma exceção, identificada apenas por nome, que pode ser lançada por métodos.</li>
+<li><strong>struct</strong> - estrutura contendo um conjunto de campos. Cada campo possui um tipo e um nome.</li>
+<li><strong>interface</strong> - define a assinatura de um serviço de um componente. Uma interface contém um conjunto de métodos e atributos, cada qual com nomes distintos e que não causam conflitos. Opcionalmente, uma interface pode herdar de outras interfaces (permite-se herança múltipla).</li>
+<li><strong>native class</strong> - permite que uma classe nativa do C++ seja "exportada" para o Coral, criando um novo tipo de valor opaco. Uma classe nativa contém um conjunto de métodos e atributos &mdash; assim como uma interface, porém as classes nativas não possuem herança. Para toda classe nativa, é obrigatório que se implemente um componente <em>wrapper</em>, responsável por fornecer reflexão para o tipo.</li>
+<li><strong>component</strong> - uma lista de interfaces providas e/ou requeridas por uma certa implementação de componente. Este tipo de especificação geralmente é mantido como um arquivo privado, pois só é útil na implementação de um módulo e não precisa ser redistribuído.</li>
+</ul>
+
+
+<p>Cada especificação deve ser feita em um arquivo separado. A extensão usada para estes arquivos é <code>.csl</code>. O nome do arquivo deve corresponder ao nome do tipo que é especificado no arquivo, enquanto que o <em>namespace</em> do tipo é definido pela localização do arquivo dentro do <code>CORAL_PATH</code> (vide a seção "Tipos" da página de <a href="fundamentals.html">fundamentos</a>.</p>
+
+<p>Uma especificação em CSL pode fazer referência a um tipo especificado em outro arquivo CSL. Para este efeito, dois tipos de identificadores podem ser usados: o simples e o qualificado. Um identificador qualificado corresponde ao <em>nome completo</em> do tipo (i.e. o caminho absoluto de <em>namespaces</em> até o tipo, separado por pontos). Um identificador simples corresponde apenas ao nome de um tipo, e pode ser usado para citar tipos no mesmo <em>namespace</em>. Outra possibilidade é que um identificador qualificado seja "importado", tornando-se um identificador simples no escopo de um arquivo CSL. Neste caso, os identificadores importados têm precedência sobre os tipos no mesmo <em>namespace</em>.</p>
+
+<p>A especificação CSL abaixo define um <code>enum</code>, chamado <code>CoffeeSpecies</code>, que contém três constantes com valores implícitos de zero a dois.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// file = coffee/beans/CoffeeSpecies.csl</span>
+<span class="hl kwb">enum</span> <span class="hl kwf">CoffeeSpecies</span>
+{
+    <span class="hl kwe">CoffeaArabica</span>,
+    <span class="hl kwe">CoffeaCanephora</span>,
+    <span class="hl kwe">CoffeaIberica</span>
+};
+</pre></div>
+
+
+<p>A especificação CSL abaixo define uma <code>struct</code>, chamada <code>RoastedCoffeeBean</code>, que contém dois campos. O primeiro campo, <code>species</code>, é do tipo definido no exemplo anterior. Como os dois tipos encontram-se no mesmo <em>namespace</em>, não é necessário usar um identificador qualificado.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// file = coffee/beans/RoastedCoffeeBean.csl</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">RoastedCoffeeBean</span>
+{
+    <span class="hl kwf">CoffeeSpecies</span> species;
+    <span class="hl kwc">int8</span> degreeOfRoast;
+};
+</pre></div>
+
+
+<p>A especificação CSL abaixo define outra <code>struct</code>, <code>CoffeeBlend</code>, que contém três campos. O segundo campo, <code>beans</code>, é um <code>array</code> do tipo definido no exemplo anterior. Como os tipos encontram-se em <em>namespaces</em> diferentes, desta vez é necessário usar um identificador qualificado.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// file = coffee/blends/CoffeeBlend.csl</span>
+<span class="hl kwb">struct</span> <span class="hl kwf">CoffeeBlend</span>
+{
+    <span class="hl kwc">string</span> name;
+    <span class="hl kwf">coffee.beans.RoastedCoffeeBean</span>[] beans;
+    <span class="hl kwc">double</span>[] percentages;
+};
+</pre></div>
+
+
+<p>O exemplo anterior pode ser re-escrito de forma a "importar" o tipo <code>RoastedCoffeeBean</code>, ao invés de citar o seu nome completo. Este recurso é especialmente útil quando um tipo é citado diversas vezes no mesmo arquivo.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// file = coffee/blends/CoffeeBlend.csl</span>
+<span class="hl kwa">import</span> <span class="hl kwf">coffee.beans.RoastedCoffeeBean</span>;
+
+<span class="hl kwb">struct</span> <span class="hl kwf">CoffeeBlend</span>
+{
+    <span class="hl kwc">string</span> name;
+    <span class="hl kwf">RoastedCoffeeBean</span>[] beans;
+    <span class="hl kwc">double</span>[] percentages;
+};
+</pre></div>
+
+
+<p>A especificação CSL abaixo define uma <code>interface</code>, chamada <code>ICoffeeMachine</code>, que contém dois atributos e dois métodos. O primeiro atributo é <em>readonly</em>, e o segundo é <em>read/write</em>. Ambos os métodos da interface declaram lançar exceções. O último método recebe um parâmetro <code>inout</code>, o que indica que o parâmetro é usado tanto para passar um argumento quanto para receber um valor de retorno.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl slc">// file = coffee/ICoffeeMachine.csl</span>
+<span class="hl kwb">interface</span> <span class="hl kwf">ICoffeeMachine</span>
+{
+    <span class="hl kwb">readonly attribute</span> <span class="hl kwc">bool</span> turnedOn;
+    <span class="hl kwb">attribute</span> <span class="hl kwf">CoffeeBlend</span> blend;
+
+    <span class="hl kwb">void</span> <span class="hl kwd">togglePower</span>() <span class="hl kwb">raises</span> <span class="hl kwf">PowerOutageException</span>;
+
+    <span class="hl kwb">void</span> <span class="hl kwd">prepareCoffee</span>( <span class="hl kwb">inout</span> <span class="hl kwc">float</span> liters )
+        <span class="hl kwb">raises</span> <span class="hl kwf">NotEnoughIngredientsException</span>, <span class="hl kwf">PowerOutageException</span>;
+};
+</pre></div>
+
+
+<h2>Descrição da Gramática</h2>
+
+<p>\subsection csl_grammar_identifiers Identificadores</p>
+
+<p>O elemento mais básico da linguagem CSL são os identificadores. Como explicado acima, existem dois tipos de identificadores: o simples e o qualificado. Um identificador simples é uma <em>string</em> ASCII, que começa obrigatoriamente com uma letra, e pode conter somente letras, números e o carácter <em>underscore ('_')</em>. Um identificador qualificado é uma lista de identificadores simples, conectados por pontos.</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">qualified-identifier </span>= <span class="hl kwc">Identifier</span> , <span class="hl opt">{</span> <span class="hl str">&quot;.&quot;</span> , <span class="hl kwc">Identifier</span> <span class="hl opt">} ;</span>
+</pre></div>
+
+
+<h3>Arquivos CSL</h3>
+
+<p>Um arquivo CSL é composto por uma lista opcional de cláusulas de importação de tipos, seguida por <strong>uma única</strong> especificação.</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">csl           </span>= <span class="hl opt">{</span> <span class="hl kwc">import-clause</span> <span class="hl opt">}</span> , <span class="hl kwc">specification</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">import-clause </span>= <span class="hl str">&quot;import&quot;</span> , <span class="hl kwc">qualified-identifier</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">specification </span>= <span class="hl kwc">enum-specification</span>         |
+                <span class="hl kwc">exception-specification</span>    |
+                <span class="hl kwc">struct-specification</span>       |
+                <span class="hl kwc">native-class-specification</span> |
+                <span class="hl kwc">interface-specification</span>    |
+                <span class="hl kwc">component-specification</span>    <span class="hl opt">;</span>
+</pre></div>
+
+
+<h3>Declaração de Tipos</h3>
+
+<p>A declaração de tipos é um elemento comum da linguagem CSL, que surge como parte da declaração de atributos e métodos. Um tipo pode ser declarado como sendo de um "tipo base" oferecido pelo Coral, ou então de um tipo especificado em outro arquivo CSL. Em qualquer caso, o tipo é considerado um <code>array</code> caso receba um par de colchetes como sufixo.</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">type-declaration </span>= <span class="hl kwc">basic-type</span> , <span class="hl opt">[</span><span class="hl kwc">pair-of-braces</span><span class="hl opt">]</span>            |
+                   <span class="hl kwc">qualified-identifier</span> , <span class="hl opt">[</span><span class="hl kwc">pair-of-braces</span><span class="hl opt">]  ;</span>
+
+<span class="hl kwa">pair-of-braces   </span>= <span class="hl str">&quot;[&quot;</span> , <span class="hl str">&quot;]&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">basic-type       </span>= <span class="hl str">&quot;any&quot;</span>                 |
+                   <span class="hl str">&quot;bool&quot;</span>                |
+                   <span class="hl str">&quot;(u?)int(8|16|32|64)&quot;</span> |
+                   <span class="hl str">&quot;float&quot;</span>               |
+                   <span class="hl str">&quot;double&quot;</span>              |
+                   <span class="hl str">&quot;string&quot;</span>              <span class="hl opt">;</span>
+</pre></div>
+
+
+<h3>Comentários e Documentação</h3>
+
+<p>Comentários estilo C/C++ podem aparecer imediatamente antes de uma especificação, declaração de atributo, método, etc. Os comentários <em>não</em> são ignorados pelo compilador CSL, e <em>não</em> podem aparecer em qualquer lugar. É proibido, por exemplo, incluir um comentário entre o início da declaração de um método e o ";" que encerra a declaração.</p>
+
+<p>Sempre que possível o compilador aproveitará os comentários em CSL como documentação dos tipos. Em especial, o compilador tentará transferir a documentação para os <em>mappings</em> gerados em C++, na forma de comentários Doxygen.</p>
+
+<p>A princípio, considera-se que todo comentário serve para documentar o elemento imediatamente a seguir à sua posição. Porém, em alguns casos pode ser útil incluir o comentário logo após o elemento a ser documentado. Nestes casos, deve-se usar o sinal "&lt;" como primeiro caráter do comentário, para indicar que ele se refere ao último elemento escrito, e não ao próximo.</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl com">/*</span>
+<span class="hl com">    This documents the enum 'CaseSensitivity'.</span>
+<span class="hl com"> */</span>
+<span class="hl kwb">enum</span> <span class="hl kwf">CaseSensitivity</span>
+{
+    <span class="hl kwf">CaseSensitive</span>,      <span class="hl slc">//&lt; This documents the constant 'CaseSensitive'</span>
+    <span class="hl kwf">CaseInsensitive</span>,    <span class="hl slc">//&lt; This documents the constant 'CaseInsensitive'</span>
+};
+</pre></div>
+
+
+<h3>Como especificar uma Enumeração (enum)</h3>
+
+<p>A gramática para especificar um <code>enum</code> é fornecida abaixo. Um <code>enum</code> deve ter pelo menos um identificador. Não é possível atribuir valores aos identificadores &mdash; os valores são sempre de 0 a (n-1).</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">enum-specification </span>= <span class="hl str">&quot;enum&quot;</span> , <span class="hl kwc">Identifier</span> , <span class="hl str">&quot;{&quot;</span> , <span class="hl kwc">identifier-list</span> , <span class="hl str">&quot;}&quot;</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">identifier-list    </span>= <span class="hl kwc">Identifier</span> , <span class="hl opt">{</span> <span class="hl str">&quot;,&quot;</span> <span class="hl kwc">Identifier</span> <span class="hl opt">} ;</span>
+</pre></div>
+
+
+<p>Exemplo de <code>enum</code>:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl kwb">enum</span> <span class="hl kwf">EventType</span>
+{
+    <span class="hl kwe">MouseEvent</span>,
+    <span class="hl kwe">KeyboardEvent</span>
+};
+</pre></div>
+
+
+<h3>Como especificar uma Exceção (exception)</h3>
+
+<p>A gramática para especificar um <code>exception</code> é fornecida abaixo. Um <code>exception</code> é identificado apenas pelo nome, e na versão atual do Coral não tem atributos nem herança.</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">exception-specification </span>= <span class="hl str">&quot;exception&quot;</span> , <span class="hl kwc">Identifier</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+</pre></div>
+
+
+<p>Exemplo de <code>exception</code>:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl kwb">exception</span> <span class="hl kwf">IllegalNameException</span>;
+</pre></div>
+
+
+<h3>Como especificar uma Estrutura (struct)</h3>
+
+<p>A gramática para especificar uma <code>struct</code> é fornecida abaixo. Uma <code>struct</code> pode conter um ou mais atributos (campos), de qualquer tipo.</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">struct-specification </span>= <span class="hl str">&quot;struct&quot;</span> , <span class="hl kwc">Identifier</span> , <span class="hl str">&quot;{&quot;</span> , <span class="hl opt">{</span> <span class="hl kwc">struct-member</span> <span class="hl opt">}</span> , <span class="hl str">&quot;}&quot;</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">struct-member        </span>= <span class="hl kwc">type-declaration</span> , <span class="hl kwc">Identifier</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+</pre></div>
+
+
+<p>Exemplo de <code>struct</code>:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl kwb">struct</span> <span class="hl kwf">Sphere</span>
+{
+    <span class="hl kwf">Vec3</span> center;
+    <span class="hl kwc">double</span> radius;
+};
+</pre></div>
+
+
+<h3>Como especificar uma Classe Nativa (native class)</h3>
+
+<p>A gramática para especificar uma <code>native class</code> é fornecida abaixo. Além do nome do tipo no Coral, é necessário fornecer &mdash; entre parênteses &mdash; o nome do tipo nativo em C++ (<code>CppType</code>) e o header onde ele está definido (<code>CppHeader</code>). Aceita-se como <code>CppType</code> qualquer identificador C++ com separação de escopo (e.g. <code>nmspc::TypeName</code>), e como <code>CppHeader</code> qualquer <em>string</em> entre os sinais de "&lt;" e ">".</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">native-class-specification </span>= <span class="hl str">&quot;native&quot;</span> , <span class="hl str">&quot;class&quot;</span> , <span class="hl kwc">Identifier</span> ,
+                                 <span class="hl str">&quot;(&quot;</span> , <span class="hl kwc">CppHeader</span> , <span class="hl kwc">CppType</span> , <span class="hl str">&quot;)&quot;</span> ,
+                                 <span class="hl str">&quot;{&quot;</span> , <span class="hl opt">{</span> <span class="hl kwc">native-class-member</span> <span class="hl opt">}</span> , <span class="hl str">&quot;}&quot;</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">native-class-member        </span>= <span class="hl kwc">attribute-declaration</span> | <span class="hl kwc">method-declaration</span> <span class="hl opt">;</span>
+</pre></div>
+
+
+<p>Um <code>native class</code> pode ter dois tipos de membros: atributos e métodos. O nome de um atributo deve começar obrigatoriamente com uma letra minúscula. Note também que o Coral não suporta <em>overload</em> de métodos &mdash; o nome de um método deve ser único, de modo que não cause conflitos com outros métodos ou com os \e accessors gerados para os atributos (leia mais na página de <a href="mapping.html">mapeamento de CSL para C++</a>).</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">attribute-declaration      </span>= <span class="hl opt">[</span><span class="hl str">&quot;readonly&quot;</span><span class="hl opt">]</span> , <span class="hl str">&quot;attribute&quot;</span> , <span class="hl kwc">type-declaration</span> , <span class="hl kwc">Identifier</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">method-declaration         </span>= <span class="hl kwc">method-type-declaration</span> , <span class="hl kwc">Identifier</span> ,
+                                 <span class="hl str">&quot;(&quot;</span> , <span class="hl opt">[</span><span class="hl kwc">parameter-declaration-list</span><span class="hl opt">]</span> , <span class="hl str">&quot;)&quot;</span> , <span class="hl str">&quot;)&quot;</span> , <span class="hl opt">[</span><span class="hl kwc">exception-list</span><span class="hl opt">]</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">method-type-declaration    </span>= <span class="hl str">&quot;void&quot;</span> | <span class="hl kwc">type-declaration</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">parameter-declaration-list </span>= <span class="hl kwc">parameter-declaration</span> , <span class="hl opt">{</span> <span class="hl str">&quot;,&quot;</span> , <span class="hl kwc">parameter-declaration</span> <span class="hl opt">} ;</span>
+
+<span class="hl kwa">parameter-declaration      </span>= <span class="hl opt">(</span> <span class="hl str">&quot;in&quot;</span> | <span class="hl str">&quot;out&quot;</span> | <span class="hl str">&quot;inout&quot;</span> <span class="hl opt">)</span> , <span class="hl kwc">type-declaration</span> , <span class="hl kwc">Identifier</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">exception-list             </span>= <span class="hl str">&quot;raises&quot;</span> , <span class="hl kwc">qualified-identifier</span> , <span class="hl opt">{</span> <span class="hl str">&quot;,&quot;</span> , <span class="hl kwc">qualified-identifier</span> <span class="hl opt">} ;</span>
+</pre></div>
+
+
+<p>Exemplo de <code>native class</code>:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl kwb">native class</span> <span class="hl kwd">Vec3</span> ( &lt;vr/<span class="hl kwf">Vec3</span>.h&gt; vr::<span class="hl kwf">Vec3</span> )
+{
+    <span class="hl kwb">attribute</span> <span class="hl kwc">double</span> x;
+    <span class="hl kwb">attribute</span> <span class="hl kwc">double</span> y;
+    <span class="hl kwb">attribute</span> <span class="hl kwc">double</span> z;
+
+    <span class="hl kwb">readonly attribute</span> <span class="hl kwc">double</span> length;
+
+    <span class="hl kwc">double</span> <span class="hl kwd">normalize</span>();
+    <span class="hl kwb">void</span> <span class="hl kwd">add</span>( <span class="hl kwb">in</span> <span class="hl kwf">Vec3</span> v );
+};
+</pre></div>
+
+
+<h3>Como especificar uma Interface (interface)</h3>
+
+<p>A gramática para especificar uma <code>interface</code> é fornecida abaixo. As declarações de atributos e métodos seguem a mesma gramática de uma <code>native class</code>. Porém, diferente das classes nativas, as interfaces podem ter herança e um novo tipo de membro: blocos de código C++, que são copiados <em>verbatim</em> para os <em>mappings</em> da interface (mais informações na página de <a href="mapping.html">mapeamento de CSL para C++</a>).</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">interface-specification </span>= <span class="hl str">&quot;interface&quot;</span> , <span class="hl kwc">Identifier</span> , <span class="hl opt">[</span><span class="hl kwc">inheritance-declaration</span><span class="hl opt">]</span> ,
+                              <span class="hl str">&quot;{&quot;</span> , <span class="hl opt">{</span> <span class="hl kwc">interface-member</span> <span class="hl opt">}</span> , <span class="hl str">&quot;}&quot;</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">inheritance-declaration </span>= <span class="hl str">&quot;:&quot;</span> , <span class="hl kwc">qualified-identifier</span> , <span class="hl opt">{</span> <span class="hl str">&quot;,&quot;</span> , <span class="hl kwc">qualified-identifier</span> <span class="hl opt">} ;</span>
+
+<span class="hl kwa">interface-member        </span>= <span class="hl kwc">cpp-block</span> | <span class="hl kwc">attribute-declaration</span> | <span class="hl kwc">method-declaration</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">cpp-block               </span>= <span class="hl str">&quot;&lt;c++&quot;</span> , <span class="hl kwb">? C++ code ?</span> , <span class="hl str">&quot;c++&gt;&quot;</span>
+</pre></div>
+
+
+<p>Note que o uso de herança &mdash; e, especialmente, herança múltipla &mdash; está sujeito a vários tipos de erros. O compilador verifica se há heranças cíclicas ou desnecessariamente redundantes. E ainda, se há conflitos entre nomes de métodos e atributos de interfaces herdadas. Para evitar conflitos, uma classe A só pode herdar das classes B e C caso o conjunto dos nomes dos membros (de A, B e C) seja totalmente disjunto.</p>
+
+<p>Exemplo de <code>interface</code>:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl kwb">interface</span> <span class="hl kwf">ILoyaltyProgram</span>
+{
+    <span class="hl kwb">attribute</span> <span class="hl kwc">int32</span> totalPoints;
+    <span class="hl kwb">readonly attribute</span> <span class="hl kwf">Date</span> expirationDate;
+
+    <span class="hl kwb">void</span> <span class="hl kwd">addPoints</span>( <span class="hl kwb">in</span> <span class="hl kwc">int32</span> points );
+    <span class="hl kwb">void</span> <span class="hl kwd">consumePoints</span>( <span class="hl kwb">in</span> <span class="hl kwc">int32</span> points )
+        <span class="hl kwb">raises</span> <span class="hl kwf">InsufficientPointsException</span>;
+};
+</pre></div>
+
+
+<h3>Como especificar um Componente (component)</h3>
+
+<p>Finalmente, a gramática para especificar um componente é fornecida abaixo.</p>
+
+<div class="sourcecode ebnf"><pre class="hl">
+<span class="hl kwa">interface-specification </span>= <span class="hl str">&quot;component&quot;</span> , <span class="hl kwc">Identifier</span> ,
+                              <span class="hl str">&quot;{&quot;</span> , <span class="hl opt">{</span> <span class="hl kwc">component-member</span> <span class="hl opt">}</span> , <span class="hl str">&quot;}&quot;</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+
+<span class="hl kwa">component-member        </span>= <span class="hl opt">(</span> <span class="hl str">&quot;provides&quot;</span> | <span class="hl str">&quot;receives&quot;</span> <span class="hl opt">)</span> , <span class="hl kwc">qualified-identifier</span> , <span class="hl kwc">Identifier</span> , <span class="hl str">&quot;;&quot;</span> <span class="hl opt">;</span>
+</pre></div>
+
+
+<p>Exemplo de <code>component</code>:</p>
+
+<div class="sourcecode csl"><pre class="hl">
+<span class="hl kwb">component</span> <span class="hl kwf">HotelReservation</span>
+{
+    <span class="hl kwb">provides</span> <span class="hl kwf">IHotelRes</span>;
+    <span class="hl kwb">receives</span> <span class="hl kwf">ILoyaltyProgram</span>;
+    <span class="hl kwb">receives</span> <span class="hl kwf">IBilling</span>;
+};
+</pre></div>
+
+</div>
+</div>
+</div>
+<div id='footer'><p>
+&copy; 2010 libcoral.org. Coral is <a href="https://github.com/libcoral/coral">open source</a>.
+See the
+<a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
+for details.
+<br />
+Updated on Nov 10 2010 03:37:53.
+</p>
+</div>
+<script type='text/javascript'>
+  //<![CDATA[
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-813587-3']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+
+</body>
+
+</html>
