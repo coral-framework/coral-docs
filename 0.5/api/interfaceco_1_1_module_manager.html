@@ -51,27 +51,44 @@ Coral 0.5
 </div>
 <div id='container'>
 <div id='sidebar'><h1>API</h1>
-
 <ul>
-<li><a href="annotated.html">Class List</a></li>
-<li><a href="hierarchy.html">Class Hierarchy</a></li>
-<li><a href="namespaces.html">Namespaces</a></li>
-<li><a href="group__functional.html">Functional Groups</a></li>
+<li>
+<a href='annotated.html'>Class List</a>
+</li>
+<li>
+<a href='hierarchy.html'>Class Hierarchy</a>
+</li>
+<li>
+<a href='namespaces.html'>Namespaces</a>
+</li>
+<li>
+<a href='group__functional.html'>Functional Groups</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Topics</h1>
-
 <ul>
-<li><a href="../fundamentals.html">Fundamentos</a></li>
-<li><a href="../types.html">Sistema de Tipos</a></li>
-<li><a href="../csl.html">Coral Specification Language (CSL)</a></li>
-<li><a href="../mapping.html">Mapeamento de CSL para C++</a></li>
-<li><a href="../compiler.html">Compilador</a></li>
-<li><a href="../cmake.html">CMake Package</a></li>
+<li>
+<a href='../fundamentals.html'>Fundamentos</a>
+</li>
+<li>
+<a href='../types.html'>Sistema de Tipos</a>
+</li>
+<li>
+<a href='../csl.html'>Coral Specification Language (CSL)</a>
+</li>
+<li>
+<a href='../mapping.html'>Mapeamento de CSL para C++</a>
+</li>
+<li>
+<a href='../compiler.html'>Compilador</a>
+</li>
+<li>
+<a href='../cmake.html'>CMake Package</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Examples</h1>
-
 <ul>
 <li>Tutorial</li>
 <li>Examples</li>
@@ -83,7 +100,7 @@ Coral 0.5
 <li class='first'>
 <a href="../">Home</a>
 </li>
-<li><a href='/'>API</a></li><li id='doxtitle'>ModuleManager Interface Reference</li>
+<li><a href='./'>API</a></li><li id='doxtitle'>ModuleManager Interface Reference</li>
 </ul>
 </div>
 <div id='docfeedback'>
@@ -157,7 +174,7 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Finds an already loaded module given its fully-qualified <code>moduleName</code>. </p>
+<p>Finds an already loaded module given its fully-qualified <em>moduleName</em>. </p>
 <p>If the module was not previously loaded, returns null. </p>
 
 </div>
@@ -202,7 +219,7 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Returns whether <code>moduleName</code> identifies a potentially loadable module (that is, whether one of the installed loaders identified a loadable artifact within the module's directory). </p>
+<p>Returns whether <em>moduleName</em> identifies a potentially loadable module (that is, whether one of the installed loaders identified a loadable artifact within the module's directory). </p>
 <p>Please notice that a positive result <b>does not</b> mean that <a class="el" href="interfaceco_1_1_module_manager.html#a971dbad975e4c12b061e7041a5a4792f" title="Loads or retrieves the module with the given fully-qualified moduleName.">load()</a> will succeed for the given module. </p>
 
 </div>
@@ -222,7 +239,7 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Loads or retrieves the module with the given fully-qualified <code>moduleName</code>. </p>
+<p>Loads or retrieves the module with the given fully-qualified <em>moduleName</em>. </p>
 <p>If the specified module is not loaded and none of the installed loaders is able to load it, a <a class="el" href="exceptionco_1_1_module_load_exception.html" title="Raised to indicate an error while loading a module.">ModuleLoadException</a> will be raised.</p>
 <p>When a module is loaded, it is brought up to date with the current state of the system. If an exception is thrown by the module or an error is detected during this process, the module will be unloaded and marked as aborted (ModuleState_Aborted), and a <a class="el" href="exceptionco_1_1_module_load_exception.html" title="Raised to indicate an error while loading a module.">ModuleLoadException</a> will be raised.</p>
 <p>Attempts to load a module that was previously marked as aborted will immediately raise a <a class="el" href="exceptionco_1_1_module_load_exception.html" title="Raised to indicate an error while loading a module.">ModuleLoadException</a>.</p>
@@ -312,7 +329,7 @@ See the
 <a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
 for details.
 <br />
-Updated on Nov 10 2010.
+Updated on Nov 11 2010.
 </p>
 </div>
 <script type='text/javascript'>

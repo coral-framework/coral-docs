@@ -51,27 +51,44 @@ Coral 0.5
 </div>
 <div id='container'>
 <div id='sidebar'><h1>API</h1>
-
 <ul>
-<li><a href="api/annotated.html">Class List</a></li>
-<li><a href="api/hierarchy.html">Class Hierarchy</a></li>
-<li><a href="api/namespaces.html">Namespaces</a></li>
-<li><a href="api/group__functional.html">Functional Groups</a></li>
+<li>
+<a href='api/annotated.html'>Class List</a>
+</li>
+<li>
+<a href='api/hierarchy.html'>Class Hierarchy</a>
+</li>
+<li>
+<a href='api/namespaces.html'>Namespaces</a>
+</li>
+<li>
+<a href='api/group__functional.html'>Functional Groups</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Topics</h1>
-
 <ul>
-<li><a href="fundamentals.html">Fundamentos</a></li>
-<li><a href="types.html">Sistema de Tipos</a></li>
-<li><a href="csl.html">Coral Specification Language (CSL)</a></li>
-<li><a href="mapping.html">Mapeamento de CSL para C++</a></li>
-<li><a href="compiler.html">Compilador</a></li>
-<li><a href="cmake.html">CMake Package</a></li>
+<li>
+<a href='fundamentals.html'>Fundamentos</a>
+</li>
+<li>
+<a href='types.html'>Sistema de Tipos</a>
+</li>
+<li>
+<a href='csl.html'>Coral Specification Language (CSL)</a>
+</li>
+<li>
+<a href='mapping.html'>Mapeamento de CSL para C++</a>
+</li>
+<li>
+<a href='compiler.html'>Compilador</a>
+</li>
+<li>
+<a href='cmake.html'>CMake Package</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Examples</h1>
-
 <ul>
 <li>Tutorial</li>
 <li>Examples</li>
@@ -490,18 +507,15 @@ Coral 0.5
         </tr>
         <tr>
             <td>Arrays de Valores</td>
-            <td>Passagem de um <tt>std::vector&lt;Type&gt;*</tt></td>
+            <td>Passagem de um <tt>std::vector&lt;Type&gt;&</tt></td>
         </tr>
         <tr>
             <td>Arrays de Referências</td>
-            <td>Passagem de um <tt>co::RefVector&lt;Type&gt;*</tt></td>
+            <td>Passagem de um <tt>co::RefVector&lt;Type&gt;&</tt></td>
         </tr>
     </tbody>
 </table>
 
-
-<p><strong>Rationale:</strong>
-Para poderem ser modificados, todos os tipos &mdash; exceto arrays &mdash; são passados por referência. Arrays, no entanto, são passadas por ponteiro, para permitir que o parâmetro seja de passagem opcional. Assim, é possível evitar a criação desnecessária de um <code>std::vector</code> ou <code>co::RefVector</code> quando a função cliente não está interessada no resultado do parâmetro. Um efeito colateral desta medida é que todo método que recebe arrays <code>out</code> ou <code>inout</code> precisa verificar se o ponteiro é NULL &mdash; algo suscetível a bugs. Porém, estima-se que em geral os benefícios da passagem opcional de arrays superem as desvantagens.</p>
 
 <p>No exemplo de mapeamento a seguir, considere que <code>RequestType</code> é um <code>enum</code>, <code>Request</code> é um <code>struct</code>, <code>ServiceDelegate</code> é uma <code>interface</code> e <code>Uuid</code> é uma classe nativa.</p>
 
@@ -572,7 +586,7 @@ See the
 <a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
 for details.
 <br />
-Updated on Nov 10 2010.
+Updated on Nov 11 2010.
 </p>
 </div>
 <script type='text/javascript'>

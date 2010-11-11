@@ -51,27 +51,44 @@ Coral 0.5
 </div>
 <div id='container'>
 <div id='sidebar'><h1>API</h1>
-
 <ul>
-<li><a href="annotated.html">Class List</a></li>
-<li><a href="hierarchy.html">Class Hierarchy</a></li>
-<li><a href="namespaces.html">Namespaces</a></li>
-<li><a href="group__functional.html">Functional Groups</a></li>
+<li>
+<a href='annotated.html'>Class List</a>
+</li>
+<li>
+<a href='hierarchy.html'>Class Hierarchy</a>
+</li>
+<li>
+<a href='namespaces.html'>Namespaces</a>
+</li>
+<li>
+<a href='group__functional.html'>Functional Groups</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Topics</h1>
-
 <ul>
-<li><a href="../fundamentals.html">Fundamentos</a></li>
-<li><a href="../types.html">Sistema de Tipos</a></li>
-<li><a href="../csl.html">Coral Specification Language (CSL)</a></li>
-<li><a href="../mapping.html">Mapeamento de CSL para C++</a></li>
-<li><a href="../compiler.html">Compilador</a></li>
-<li><a href="../cmake.html">CMake Package</a></li>
+<li>
+<a href='../fundamentals.html'>Fundamentos</a>
+</li>
+<li>
+<a href='../types.html'>Sistema de Tipos</a>
+</li>
+<li>
+<a href='../csl.html'>Coral Specification Language (CSL)</a>
+</li>
+<li>
+<a href='../mapping.html'>Mapeamento de CSL para C++</a>
+</li>
+<li>
+<a href='../compiler.html'>Compilador</a>
+</li>
+<li>
+<a href='../cmake.html'>CMake Package</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Examples</h1>
-
 <ul>
 <li>Tutorial</li>
 <li>Examples</li>
@@ -83,7 +100,7 @@ Coral 0.5
 <li class='first'>
 <a href="../">Home</a>
 </li>
-<li><a href='/'>API</a></li><li id='doxtitle'>ServiceManager Interface Reference</li>
+<li><a href='./'>API</a></li><li id='doxtitle'>ServiceManager Interface Reference</li>
 </ul>
 </div>
 <div id='docfeedback'>
@@ -174,10 +191,10 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Publishes the specified <code>serviceInstance</code> as the global provider of <code>serviceType</code>. </p>
+<p>Publishes the specified <em>serviceInstance</em> as the global provider of <em>serviceType</em>. </p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if any of the arguments are null, or if the interface type of <code>serviceInstance</code> is not a subtype of <code>serviceType</code>. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if any of the arguments are null, or if the interface type of <em>serviceInstance</em> is not a subtype of <em>serviceType</em>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -215,10 +232,10 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Publishes a <code>serviceInstance</code> as the provider of <code>serviceType</code> for clients of type <code>clientType</code>. </p>
+<p>Publishes a <em>serviceInstance</em> as the provider of <em>serviceType</em> for clients of type <em>clientType</em>. </p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if a) any of the arguments are null; or b) the interface type of <code>serviceInstance</code> is not a subtype of <code>serviceType</code>; or c) <code>clientType</code> is the <a class="el" href="interfaceco_1_1_interface.html" title="The co.Interface pseudo-interface, implicitly inherited by all interfaces.">co.Interface</a> interface (in this case you should call <a class="el" href="interfaceco_1_1_service_manager.html#a8706cc1e488512972367e8ac9dbc451c" title="Publishes the specified serviceInstance as the global provider of serviceType.">addService()</a> instead). </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if a) any of the arguments are null; or b) the interface type of <em>serviceInstance</em> is not a subtype of <em>serviceType</em>; or c) <em>clientType</em> is the <a class="el" href="interfaceco_1_1_interface.html" title="The co.Interface pseudo-interface, implicitly inherited by all interfaces.">co.Interface</a> interface (in this case you should call <a class="el" href="interfaceco_1_1_service_manager.html#a8706cc1e488512972367e8ac9dbc451c" title="Publishes the specified serviceInstance as the global provider of serviceType.">addService()</a> instead). </td></tr>
   </table>
   </dd>
 </dl>
@@ -250,14 +267,14 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Publishes a global provider of <code>serviceType</code> with lazy instantiation. </p>
-<p>The service is immediately declared as available, but its instance is not created until the service is requested (unless the <code>isLazy</code> attribute is currently set to <code>false</code>).</p>
-<p>To create the service instance, this manager will attempt to instantiate a component using the given <code>componentName</code> and get its facet of type <code>serviceType</code>. If an error occurs, the service will be removed and the calling method will raise a <a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a>.</p>
+<p>Publishes a global provider of <em>serviceType</em> with lazy instantiation. </p>
+<p>The service is immediately declared as available, but its instance is not created until the service is requested (unless the <em>isLazy</em> attribute is currently set to <em>false</em>).</p>
+<p>To create the service instance, this manager will attempt to instantiate a component using the given <em>componentName</em> and get its facet of type <em>serviceType</em>. If an error occurs, the service will be removed and the calling method will raise a <a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a>.</p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if <code>serviceType</code> is null or <code>componentName</code> does not identify a valid component type. </td></tr>
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_no_such_interface_exception.html" title="Raised to indicate that the requested interface is not available.">NoSuchInterfaceException</a></td><td>if the named component type does not provide an interface of type <code>serviceType</code>. </td></tr>
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if <code>isLazy</code> is <code>false</code> and the service cannot be instantiated. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if <em>serviceType</em> is null or <em>componentName</em> does not identify a valid component type. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_no_such_interface_exception.html" title="Raised to indicate that the requested interface is not available.">NoSuchInterfaceException</a></td><td>if the named component type does not provide an interface of type <em>serviceType</em>. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if <em>isLazy</em> is <em>false</em> and the service cannot be instantiated. </td></tr>
   </table>
   </dd>
 </dl>
@@ -295,14 +312,14 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Publishes a provider of <code>serviceType</code> for clients of type <code>clientType</code>, with lazy instantiation. </p>
-<p>The service is immediately declared as available, but its instance creation is delayed until the service is requested (unless the <code>isLazy</code> attribute is currently set to <code>false</code>).</p>
-<p>To create the service instance, this manager will attempt to instantiate a component using the given <code>componentName</code> and get its facet of type <code>serviceType</code>. If an error occurs, the service will be removed and the calling method will raise a <a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a>.</p>
+<p>Publishes a provider of <em>serviceType</em> for clients of type <em>clientType</em>, with lazy instantiation. </p>
+<p>The service is immediately declared as available, but its instance creation is delayed until the service is requested (unless the <em>isLazy</em> attribute is currently set to <em>false</em>).</p>
+<p>To create the service instance, this manager will attempt to instantiate a component using the given <em>componentName</em> and get its facet of type <em>serviceType</em>. If an error occurs, the service will be removed and the calling method will raise a <a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a>.</p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if a) <code>serviceType</code> or <code>clientType</code> are null; or b) <code>componentName</code> does not identify a valid component type; or c) <code>clientType</code> is the <a class="el" href="interfaceco_1_1_interface.html" title="The co.Interface pseudo-interface, implicitly inherited by all interfaces.">co.Interface</a> interface (in this case you should call <a class="el" href="interfaceco_1_1_service_manager.html#a8706cc1e488512972367e8ac9dbc451c" title="Publishes the specified serviceInstance as the global provider of serviceType.">addService()</a> instead). </td></tr>
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_no_such_interface_exception.html" title="Raised to indicate that the requested interface is not available.">NoSuchInterfaceException</a></td><td>if the named component type does not provide an interface of type <code>serviceType</code>. </td></tr>
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if <code>isLazy</code> is <code>false</code> and the service cannot be instantiated. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if a) <em>serviceType</em> or <em>clientType</em> are null; or b) <em>componentName</em> does not identify a valid component type; or c) <em>clientType</em> is the <a class="el" href="interfaceco_1_1_interface.html" title="The co.Interface pseudo-interface, implicitly inherited by all interfaces.">co.Interface</a> interface (in this case you should call <a class="el" href="interfaceco_1_1_service_manager.html#a8706cc1e488512972367e8ac9dbc451c" title="Publishes the specified serviceInstance as the global provider of serviceType.">addService()</a> instead). </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_no_such_interface_exception.html" title="Raised to indicate that the requested interface is not available.">NoSuchInterfaceException</a></td><td>if the named component type does not provide an interface of type <em>serviceType</em>. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if <em>isLazy</em> is <em>false</em> and the service cannot be instantiated. </td></tr>
   </table>
   </dd>
 </dl>
@@ -324,11 +341,11 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Gets the global provider of the specified <code>serviceType</code>. </p>
+<p>Gets the global provider of the specified <em>serviceType</em>. </p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if serviceType is null. </td></tr>
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no global instance of <code>serviceType</code> is available. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no global instance of <em>serviceType</em> is available. </td></tr>
   </table>
   </dd>
 </dl>
@@ -360,12 +377,12 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Gets the most appropriate provider of <code>serviceType</code> for the given <code>clientInstance</code>. </p>
-<p>This method first checks if the <code>clientInstance's</code> component provides an interface of type <code>serviceType</code>. If so, that interface is returned. Otherwise, this method behaves like a call to <code>getServiceForType( service, clientInstance-&gt;getInterfaceType() )</code>.</p>
+<p>Gets the most appropriate provider of <em>serviceType</em> for the given <em>clientInstance</em>. </p>
+<p>This method first checks if the <em>clientInstance's</em> component provides an interface of type <em>serviceType</em>. If so, that interface is returned. Otherwise, this method behaves like a call to <code>getServiceForType( service, clientInstance-&gt;getInterfaceType() )</code>.</p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if any of the arguments are null. </td></tr>
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no suitable instance of <code>serviceType</code> is available for <code>clientInstance</code>. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no suitable instance of <em>serviceType</em> is available for <em>clientInstance</em>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -397,12 +414,12 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Gets the most appropriate provider of <code>serviceType</code> for clients of the specified <code>clientType</code>. </p>
-<p>If a service instance was not specifically added for the <code>clientType</code>, this method will pick the first service instance available for a super-type of <code>clientType</code> (by doing a depth-first search in the list of superInterfaces of <code>clientType</code>). Finally, if no specialized instance is available for <code>clientType</code>, this method will return the global provider of <code>serviceType</code>.</p>
+<p>Gets the most appropriate provider of <em>serviceType</em> for clients of the specified <em>clientType</em>. </p>
+<p>If a service instance was not specifically added for the <em>clientType</em>, this method will pick the first service instance available for a super-type of <em>clientType</em> (by doing a depth-first search in the list of superInterfaces of <em>clientType</em>). Finally, if no specialized instance is available for <em>clientType</em>, this method will return the global provider of <em>serviceType</em>.</p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="exceptionco_1_1_illegal_argument_exception.html" title="Raised to indicate that a method has been passed an illegal or inappropriate argument.">IllegalArgumentException</a></td><td>if any of the arguments are null. </td></tr>
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no suitable instance of <code>serviceType</code> is available for <code>clientType</code>. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no suitable instance of <em>serviceType</em> is available for <em>clientType</em>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -424,10 +441,10 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Removes the global instance of the specified <code>serviceType</code>. </p>
+<p>Removes the global instance of the specified <em>serviceType</em>. </p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no global instance of <code>serviceType</code> was found. </td></tr>
+    <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no global instance of <em>serviceType</em> was found. </td></tr>
   </table>
   </dd>
 </dl>
@@ -459,7 +476,7 @@ Methods</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Removes the instance of <code>serviceType</code> that was published for <code>clientType</code>. </p>
+<p>Removes the instance of <em>serviceType</em> that was published for <em>clientType</em>. </p>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="exceptionco_1_1_missing_service_exception.html" title="Raised to indicate that a required service is not available.">MissingServiceException</a></td><td>if no matching service instance was found. </td></tr>
@@ -495,7 +512,7 @@ See the
 <a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
 for details.
 <br />
-Updated on Nov 10 2010.
+Updated on Nov 11 2010.
 </p>
 </div>
 <script type='text/javascript'>

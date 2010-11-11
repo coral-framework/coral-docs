@@ -51,27 +51,44 @@ Coral 0.5
 </div>
 <div id='container'>
 <div id='sidebar'><h1>API</h1>
-
 <ul>
-<li><a href="annotated.html">Class List</a></li>
-<li><a href="hierarchy.html">Class Hierarchy</a></li>
-<li><a href="namespaces.html">Namespaces</a></li>
-<li><a href="group__functional.html">Functional Groups</a></li>
+<li>
+<a href='annotated.html'>Class List</a>
+</li>
+<li>
+<a href='hierarchy.html'>Class Hierarchy</a>
+</li>
+<li>
+<a href='namespaces.html'>Namespaces</a>
+</li>
+<li>
+<a href='group__functional.html'>Functional Groups</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Topics</h1>
-
 <ul>
-<li><a href="../fundamentals.html">Fundamentos</a></li>
-<li><a href="../types.html">Sistema de Tipos</a></li>
-<li><a href="../csl.html">Coral Specification Language (CSL)</a></li>
-<li><a href="../mapping.html">Mapeamento de CSL para C++</a></li>
-<li><a href="../compiler.html">Compilador</a></li>
-<li><a href="../cmake.html">CMake Package</a></li>
+<li>
+<a href='../fundamentals.html'>Fundamentos</a>
+</li>
+<li>
+<a href='../types.html'>Sistema de Tipos</a>
+</li>
+<li>
+<a href='../csl.html'>Coral Specification Language (CSL)</a>
+</li>
+<li>
+<a href='../mapping.html'>Mapeamento de CSL para C++</a>
+</li>
+<li>
+<a href='../compiler.html'>Compilador</a>
+</li>
+<li>
+<a href='../cmake.html'>CMake Package</a>
+</li>
 </ul>
 <div id='separator'></div>
 <h1>Examples</h1>
-
 <ul>
 <li>Tutorial</li>
 <li>Examples</li>
@@ -83,7 +100,7 @@ Coral 0.5
 <li class='first'>
 <a href="../">Home</a>
 </li>
-<li><a href='/'>API</a></li><li id='doxtitle'>LexicalUtilities Class Reference</li>
+<li><a href='./'>API</a></li><li id='doxtitle'>LexicalUtilities Class Reference</li>
 </ul>
 </div>
 <div id='docfeedback'>
@@ -164,7 +181,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Returns whether the passed parameter <code>str</code> is a valid identifier. Identifiers must start with a letter, which can then be followed by more letters, numbers and the underscore symbol. </p>
+<p>Returns whether the passed parameter <em>str</em> is a valid identifier. Identifiers must start with a letter, which can then be followed by more letters, numbers and the underscore symbol. </p>
 
 </div>
 </div>
@@ -182,7 +199,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Returns whether the passed <code>identifier</code> is a valid attribute name (i.e. starts with lower case). </p>
+<p>Returns whether the passed <em>identifier</em> is a valid attribute name (i.e. starts with lower case). </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>this method assumes the passed parameter is already a valid identifier. </dd></dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classco_1_1_lexical_utilities.html#ad20dbdcfcf7b37bdd97e56880e5de0ac">isValidIdentifier</a> </dd></dl>
 
@@ -219,7 +236,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Generates an accessor name given an attribute name. </p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>This method assumes <code>methodName</code> is a valid identifier. </dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>This method assumes <em>methodName</em> is a valid identifier. </dd></dl>
 
 </div>
 </div>
@@ -253,7 +270,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Parses a method name looking for a specific acessor name pattern. The passed method name will be searched for the patterns created by the <a class="el" href="classco_1_1_lexical_utilities.html#a8a24f7256ce791fb43503294b5bec38b">formatAccessor()</a> method. Only the kind of accessors specified in the parameter <code>accessorKinds</code> will be searched for.</p>
+<p>Parses a method name looking for a specific acessor name pattern. The passed method name will be searched for the patterns created by the <a class="el" href="classco_1_1_lexical_utilities.html#a8a24f7256ce791fb43503294b5bec38b">formatAccessor()</a> method. Only the kind of accessors specified in the parameter <em>accessorKinds</em> will be searched for.</p>
 <p>If a prefix 'get' or 'set' is found, the subsequent character must be a capital letter (or this method will return -1). If a valid pattern is found, the prefix is removed and the first letter is converted back to lowercase.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -271,10 +288,10 @@ Static Public Member Functions</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>One of the following values:<ul>
 <li>co::LexicalUtilities::Getter if a <em>getter</em> name was parsed;</li>
 <li>co::LexicalUtilities::Setter if a <em>setter</em> name was parsed;</li>
-<li>-1 if <code>methodName</code> was not a valid accessor name.</li>
+<li>-1 if <em>methodName</em> was not a valid accessor name.</li>
 </ul>
 </dd></dl>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>This method assumes <code>methodName</code> is a valid identifier. </dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>This method assumes <em>methodName</em> is a valid identifier. </dd></dl>
 
 </div>
 </div>
@@ -288,7 +305,7 @@ See the
 <a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
 for details.
 <br />
-Updated on Nov 10 2010.
+Updated on Nov 11 2010.
 </p>
 </div>
 <script type='text/javascript'>
