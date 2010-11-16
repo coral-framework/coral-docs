@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-<meta content='text/html' http-equiv='Content-Type' />
-<title>
-Coral 0.5: Fundamentos
-</title>
+<title>Coral 0.5: Fundamentos</title>
 <link href='style/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
 <link href='style/print.css' media='print' rel='stylesheet' type='text/css' />
 <!--[if lt IE 8]>
@@ -13,6 +10,7 @@ Coral 0.5: Fundamentos
 <script language='javascript' src='js/column.js' type='text/javascript'></script>
 <script language='javascript' src='js/jquery.js' type='text/javascript'></script>
 <script language='javascript' src='js/addons.js' type='text/javascript'></script>
+
 </head>
 <body class='bp'>
 <div id='header'><div id='logotitle'>
@@ -121,7 +119,7 @@ Coral 0.5
 
 <p>Uma maneira de garantir isto é utilizando uma IDL (<em>Interface Definition Language</em>), e mapeamentos da IDL para as linguagens de programação desejadas. Com o auxílio de um compilador IDL, é possível gerar código automático que faz a conversão entre o protocolo específico de uma linguagem de programação e o protocolo comum.</p>
 
-<p>O Coral define a linguagem <em><a href="csl.html">Coral Specification Language (CSL)</a></em>, que se assemelha a uma IDL simples, mas também serve para especificar componentes e "classes nativas" (um conceito específico do Coral). Como o Coral baseia-se no C++, que não provê reflexão em tempo de execução, a infra-estrutura da linguagem CSL também é usada para adicionar suporte à reflexão de tipos.</p>
+<p>O Coral define a linguagem <em><a href="csl.html">Coral Specification Language (CSL)</a></em>, que se assemelha a uma IDL simples, mas também serve para especificar componentes e &#8220;classes nativas&#8221; (um conceito específico do Coral). Como o Coral baseia-se no C++, que não provê reflexão em tempo de execução, a infra-estrutura da linguagem CSL também é usada para adicionar suporte à reflexão de tipos.</p>
 
 <h2>Tipos</h2>
 
@@ -213,7 +211,7 @@ Coral 0.5
 <p>O suporte a programação reflexiva no Coral é o alicerce para inúmeros serviços do sistema de componentes.
 O sistema de reflexão, oferecido como uma extensão do sistema de tipos, permite a <strong>manipulação</strong> de tipos e instâncias.</p>
 
-<p>Enquanto que a introspecção de tipos é feita através de objetos do tipo <code>Type</code>, os serviços de reflexão são oferecidos por objetos do tipo <code>Reflector</code>. Alguns exemplos de operações oferecidas pelos <code>Reflector</code>'s são:</p>
+<p>Enquanto que a introspecção de tipos é feita através de objetos do tipo <code>Type</code>, os serviços de reflexão são oferecidos por objetos do tipo <code>Reflector</code>. Alguns exemplos de operações oferecidas pelos <code>Reflector</code>&#8217;s são:</p>
 
 <ul>
 <li>Instanciação de um tipo.</li>
@@ -230,9 +228,9 @@ Por razões de desempenho, o carregamento de bibliotecas no Coral é feito de form
 
 <p>Um módulo é um <strong>pacote de extensão</strong> que adiciona novos tipos, recursos e funcionalidades às aplicações. Os módulos são as unidades de empacotamento e distribuição do Coral. Fisicamente, eles são diretórios; e podem conter bibliotecas dinâmicas, scripts Lua, arquivos CSL, imagens, etc.</p>
 
-<p>Como descrito na seção de Tipos, todo diretório acessível através do <code>CORAL_PATH</code> define um <em>namespace</em>. Por sua vez, todo namespace é <em>potencialmente</em> um módulo. O que determina se um namespace é um módulo ou não é a existência de um <code>ModuleLoader</code> (uma interface) capaz de "carregar" um <code>Module</code> a partir do conteúdo do seu diretório.</p>
+<p>Como descrito na seção de Tipos, todo diretório acessível através do <code>CORAL_PATH</code> define um <em>namespace</em>. Por sua vez, todo namespace é <em>potencialmente</em> um módulo. O que determina se um namespace é um módulo ou não é a existência de um <code>ModuleLoader</code> (uma interface) capaz de &#8220;carregar&#8221; um <code>Module</code> a partir do conteúdo do seu diretório.</p>
 
-<p>Um mesmo módulo pode ser simultaneamente carregado por múltiplos <code>ModuleLoader</code>'s. Caso nenhum <code>ModuleLoader</code> seja capaz de carregar um módulo a partir de um certo diretório, o diretório é considerado apenas um namespace, e não um módulo. O Coral vem com um <code>ModuleLoader</code> padrão capaz de carregar módulos a partir de <em>biblioteca dinâmicas</em>. Neste caso, a biblioteca deve ter o mesmo nome do diretório do módulo.</p>
+<p>Um mesmo módulo pode ser simultaneamente carregado por múltiplos <code>ModuleLoader</code>&#8217;s. Caso nenhum <code>ModuleLoader</code> seja capaz de carregar um módulo a partir de um certo diretório, o diretório é considerado apenas um namespace, e não um módulo. O Coral vem com um <code>ModuleLoader</code> padrão capaz de carregar módulos a partir de <em>biblioteca dinâmicas</em>. Neste caso, a biblioteca deve ter o mesmo nome do diretório do módulo.</p>
 </div>
 </div>
 </div>
@@ -242,7 +240,7 @@ See the
 <a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
 for details.
 <br />
-Updated on Nov 11 2010.
+Updated on Nov 13 2010.
 </p>
 </div>
 <script type='text/javascript'>
@@ -262,5 +260,4 @@ Updated on Nov 11 2010.
 </script>
 
 </body>
-
 </html>

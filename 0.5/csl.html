@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-<meta content='text/html' http-equiv='Content-Type' />
-<title>
-Coral 0.5: Coral Specification Language (CSL)
-</title>
+<title>Coral 0.5: Coral Specification Language (CSL)</title>
 <link href='style/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
 <link href='style/print.css' media='print' rel='stylesheet' type='text/css' />
 <!--[if lt IE 8]>
@@ -13,6 +10,7 @@ Coral 0.5: Coral Specification Language (CSL)
 <script language='javascript' src='js/column.js' type='text/javascript'></script>
 <script language='javascript' src='js/jquery.js' type='text/javascript'></script>
 <script language='javascript' src='js/addons.js' type='text/javascript'></script>
+
 </head>
 <body class='bp'>
 <div id='header'><div id='logotitle'>
@@ -128,14 +126,14 @@ Coral 0.5
 <li><strong>exception</strong> - uma exceção, identificada apenas por nome, que pode ser lançada por métodos.</li>
 <li><strong>struct</strong> - estrutura contendo um conjunto de campos. Cada campo possui um tipo e um nome.</li>
 <li><strong>interface</strong> - define a assinatura de um serviço de um componente. Uma interface contém um conjunto de métodos e atributos, cada qual com nomes distintos e que não causam conflitos. Opcionalmente, uma interface pode herdar de outras interfaces (permite-se herança múltipla).</li>
-<li><strong>native class</strong> - permite que uma classe nativa do C++ seja "exportada" para o Coral, criando um novo tipo de valor opaco. Uma classe nativa contém um conjunto de métodos e atributos &mdash; assim como uma interface, porém as classes nativas não possuem herança. Para toda classe nativa, é obrigatório que se implemente um componente <em>wrapper</em>, responsável por fornecer reflexão para o tipo.</li>
+<li><strong>native class</strong> - permite que uma classe nativa do C++ seja &#8220;exportada&#8221; para o Coral, criando um novo tipo de valor opaco. Uma classe nativa contém um conjunto de métodos e atributos &mdash; assim como uma interface, porém as classes nativas não possuem herança. Para toda classe nativa, é obrigatório que se implemente um componente <em>wrapper</em>, responsável por fornecer reflexão para o tipo.</li>
 <li><strong>component</strong> - uma lista de interfaces providas e/ou requeridas por uma certa implementação de componente. Este tipo de especificação geralmente é mantido como um arquivo privado, pois só é útil na implementação de um módulo e não precisa ser redistribuído.</li>
 </ul>
 
 
-<p>Cada especificação deve ser feita em um arquivo separado. A extensão usada para estes arquivos é <code>.csl</code>. O nome do arquivo deve corresponder ao nome do tipo que é especificado no arquivo, enquanto que o <em>namespace</em> do tipo é definido pela localização do arquivo dentro do <code>CORAL_PATH</code> (vide a seção "Tipos" da página de <a href="fundamentals.html">fundamentos</a>.</p>
+<p>Cada especificação deve ser feita em um arquivo separado. A extensão usada para estes arquivos é <code>.csl</code>. O nome do arquivo deve corresponder ao nome do tipo que é especificado no arquivo, enquanto que o <em>namespace</em> do tipo é definido pela localização do arquivo dentro do <code>CORAL_PATH</code> (vide a seção &#8220;Tipos&#8221; da página de <a href="fundamentals.html">fundamentos</a>.</p>
 
-<p>Uma especificação em CSL pode fazer referência a um tipo especificado em outro arquivo CSL. Para este efeito, dois tipos de identificadores podem ser usados: o simples e o qualificado. Um identificador qualificado corresponde ao <em>nome completo</em> do tipo (i.e. o caminho absoluto de <em>namespaces</em> até o tipo, separado por pontos). Um identificador simples corresponde apenas ao nome de um tipo, e pode ser usado para citar tipos no mesmo <em>namespace</em>. Outra possibilidade é que um identificador qualificado seja "importado", tornando-se um identificador simples no escopo de um arquivo CSL. Neste caso, os identificadores importados têm precedência sobre os tipos no mesmo <em>namespace</em>.</p>
+<p>Uma especificação em CSL pode fazer referência a um tipo especificado em outro arquivo CSL. Para este efeito, dois tipos de identificadores podem ser usados: o simples e o qualificado. Um identificador qualificado corresponde ao <em>nome completo</em> do tipo (i.e. o caminho absoluto de <em>namespaces</em> até o tipo, separado por pontos). Um identificador simples corresponde apenas ao nome de um tipo, e pode ser usado para citar tipos no mesmo <em>namespace</em>. Outra possibilidade é que um identificador qualificado seja &#8220;importado&#8221;, tornando-se um identificador simples no escopo de um arquivo CSL. Neste caso, os identificadores importados têm precedência sobre os tipos no mesmo <em>namespace</em>.</p>
 
 <p>A especificação CSL abaixo define um <code>enum</code>, chamado <code>CoffeeSpecies</code>, que contém três constantes com valores implícitos de zero a dois.</p>
 
@@ -175,7 +173,7 @@ Coral 0.5
 </pre></div>
 
 
-<p>O exemplo anterior pode ser re-escrito de forma a "importar" o tipo <code>RoastedCoffeeBean</code>, ao invés de citar o seu nome completo. Este recurso é especialmente útil quando um tipo é citado diversas vezes no mesmo arquivo.</p>
+<p>O exemplo anterior pode ser re-escrito de forma a &#8220;importar&#8221; o tipo <code>RoastedCoffeeBean</code>, ao invés de citar o seu nome completo. Este recurso é especialmente útil quando um tipo é citado diversas vezes no mesmo arquivo.</p>
 
 <div class="sourcecode csl"><pre class="hl">
 <span class="hl slc">// file = coffee/blends/CoffeeBlend.csl</span>
@@ -211,7 +209,7 @@ Coral 0.5
 
 <p>\subsection csl_grammar_identifiers Identificadores</p>
 
-<p>O elemento mais básico da linguagem CSL são os identificadores. Como explicado acima, existem dois tipos de identificadores: o simples e o qualificado. Um identificador simples é uma <em>string</em> ASCII, que começa obrigatoriamente com uma letra, e pode conter somente letras, números e o carácter <em>underscore ('_')</em>. Um identificador qualificado é uma lista de identificadores simples, conectados por pontos.</p>
+<p>O elemento mais básico da linguagem CSL são os identificadores. Como explicado acima, existem dois tipos de identificadores: o simples e o qualificado. Um identificador simples é uma <em>string</em> ASCII, que começa obrigatoriamente com uma letra, e pode conter somente letras, números e o carácter <em>underscore (&#8216;_&#8217;)</em>. Um identificador qualificado é uma lista de identificadores simples, conectados por pontos.</p>
 
 <div class="sourcecode ebnf"><pre class="hl">
 <span class="hl kwa">qualified-identifier </span>= <span class="hl kwc">Identifier</span> , <span class="hl opt">{</span> <span class="hl str">&quot;.&quot;</span> , <span class="hl kwc">Identifier</span> <span class="hl opt">} ;</span>
@@ -238,7 +236,7 @@ Coral 0.5
 
 <h3>Declaração de Tipos</h3>
 
-<p>A declaração de tipos é um elemento comum da linguagem CSL, que surge como parte da declaração de atributos e métodos. Um tipo pode ser declarado como sendo de um "tipo base" oferecido pelo Coral, ou então de um tipo especificado em outro arquivo CSL. Em qualquer caso, o tipo é considerado um <code>array</code> caso receba um par de colchetes como sufixo.</p>
+<p>A declaração de tipos é um elemento comum da linguagem CSL, que surge como parte da declaração de atributos e métodos. Um tipo pode ser declarado como sendo de um &#8220;tipo base&#8221; oferecido pelo Coral, ou então de um tipo especificado em outro arquivo CSL. Em qualquer caso, o tipo é considerado um <code>array</code> caso receba um par de colchetes como sufixo.</p>
 
 <div class="sourcecode ebnf"><pre class="hl">
 <span class="hl kwa">type-declaration </span>= <span class="hl kwc">basic-type</span> , <span class="hl opt">[</span><span class="hl kwc">pair-of-braces</span><span class="hl opt">]</span>            |
@@ -257,11 +255,11 @@ Coral 0.5
 
 <h3>Comentários e Documentação</h3>
 
-<p>Comentários estilo C/C++ podem aparecer imediatamente antes de uma especificação, declaração de atributo, método, etc. Os comentários <em>não</em> são ignorados pelo compilador CSL, e <em>não</em> podem aparecer em qualquer lugar. É proibido, por exemplo, incluir um comentário entre o início da declaração de um método e o ";" que encerra a declaração.</p>
+<p>Comentários estilo C/C++ podem aparecer imediatamente antes de uma especificação, declaração de atributo, método, etc. Os comentários <em>não</em> são ignorados pelo compilador CSL, e <em>não</em> podem aparecer em qualquer lugar. É proibido, por exemplo, incluir um comentário entre o início da declaração de um método e o &#8220;;&#8221; que encerra a declaração.</p>
 
 <p>Sempre que possível o compilador aproveitará os comentários em CSL como documentação dos tipos. Em especial, o compilador tentará transferir a documentação para os <em>mappings</em> gerados em C++, na forma de comentários Doxygen.</p>
 
-<p>A princípio, considera-se que todo comentário serve para documentar o elemento imediatamente a seguir à sua posição. Porém, em alguns casos pode ser útil incluir o comentário logo após o elemento a ser documentado. Nestes casos, deve-se usar o sinal "&lt;" como primeiro caráter do comentário, para indicar que ele se refere ao último elemento escrito, e não ao próximo.</p>
+<p>A princípio, considera-se que todo comentário serve para documentar o elemento imediatamente a seguir à sua posição. Porém, em alguns casos pode ser útil incluir o comentário logo após o elemento a ser documentado. Nestes casos, deve-se usar o sinal &#8220;&lt;&#8221; como primeiro caráter do comentário, para indicar que ele se refere ao último elemento escrito, e não ao próximo.</p>
 
 <div class="sourcecode csl"><pre class="hl">
 <span class="hl com">/*</span>
@@ -337,7 +335,7 @@ Coral 0.5
 
 <h3>Como especificar uma Classe Nativa (native class)</h3>
 
-<p>A gramática para especificar uma <code>native class</code> é fornecida abaixo. Além do nome do tipo no Coral, é necessário fornecer &mdash; entre parênteses &mdash; o nome do tipo nativo em C++ (<code>CppType</code>) e o header onde ele está definido (<code>CppHeader</code>). Aceita-se como <code>CppType</code> qualquer identificador C++ com separação de escopo (e.g. <code>nmspc::TypeName</code>), e como <code>CppHeader</code> qualquer <em>string</em> entre os sinais de "&lt;" e ">".</p>
+<p>A gramática para especificar uma <code>native class</code> é fornecida abaixo. Além do nome do tipo no Coral, é necessário fornecer &mdash; entre parênteses &mdash; o nome do tipo nativo em C++ (<code>CppType</code>) e o header onde ele está definido (<code>CppHeader</code>). Aceita-se como <code>CppType</code> qualquer identificador C++ com separação de escopo (e.g. <code>nmspc::TypeName</code>), e como <code>CppHeader</code> qualquer <em>string</em> entre os sinais de &#8220;&lt;&#8221; e &#8220;>&#8221;.</p>
 
 <div class="sourcecode ebnf"><pre class="hl">
 <span class="hl kwa">native-class-specification </span>= <span class="hl str">&quot;native&quot;</span> , <span class="hl str">&quot;class&quot;</span> , <span class="hl kwc">Identifier</span> ,
@@ -448,7 +446,7 @@ See the
 <a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
 for details.
 <br />
-Updated on Nov 11 2010.
+Updated on Nov 13 2010.
 </p>
 </div>
 <script type='text/javascript'>
@@ -468,5 +466,4 @@ Updated on Nov 11 2010.
 </script>
 
 </body>
-
 </html>

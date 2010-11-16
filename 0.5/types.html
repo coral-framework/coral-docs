@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-<meta content='text/html' http-equiv='Content-Type' />
-<title>
-Coral 0.5: Sistema de Tipos
-</title>
+<title>Coral 0.5: Sistema de Tipos</title>
 <link href='style/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
 <link href='style/print.css' media='print' rel='stylesheet' type='text/css' />
 <!--[if lt IE 8]>
@@ -13,6 +10,7 @@ Coral 0.5: Sistema de Tipos
 <script language='javascript' src='js/column.js' type='text/javascript'></script>
 <script language='javascript' src='js/jquery.js' type='text/javascript'></script>
 <script language='javascript' src='js/addons.js' type='text/javascript'></script>
+
 </head>
 <body class='bp'>
 <div id='header'><div id='logotitle'>
@@ -124,7 +122,7 @@ As espécies de tipos oferecidas pelo Coral são:</p>
 <li><strong>enum</strong> - enumeração de identificadores constantes, com valores de 0 a (n-1).</li>
 <li><strong>exception</strong> - exceção, identificada apenas por nome, que pode ser lançada por métodos.</li>
 <li><strong>struct</strong> - conjunto de campos de tipos diversos, identificados por nomes.</li>
-<li><strong>native class</strong> - importa uma classe nativa do C++ como uma espécie de "interface leve" no Coral.</li>
+<li><strong>native class</strong> - importa uma classe nativa do C++ como uma espécie de &#8220;interface leve&#8221; no Coral.</li>
 <li><strong>interface</strong> - conjunto de métodos e atributos para acessar um serviço de um componente.</li>
 <li><strong>any</strong> - funciona como um <code>union</code> (ou <em>variant</em>), capaz de guardar qualquer tipo do Coral.</li>
 </ul>
@@ -210,7 +208,7 @@ As espécies de tipos oferecidas pelo Coral são:</p>
 <li>Fornece interoperabilidade para classes implementadas fora do sistema de componentes, em C++.</li>
 <li>Não tem herança. Só tem um construtor default.</li>
 <li>É considerado um tipo de dado (copiado por valor), e não uma referência (i.e. não é ref-counted).</li>
-<li>Não gera classe de interface em C++, funciona apenas como um "proxy" (headerfile/typename) e associa operadores (e.g. <code>co::kindOf</code> e <code>co::typeOf</code>) ao tipo.</li>
+<li>Não gera classe de interface em C++, funciona apenas como um &#8220;proxy&#8221; (headerfile/typename) e associa operadores (e.g. <code>co::kindOf</code> e <code>co::typeOf</code>) ao tipo.</li>
 <li>Deve ser implementado através de um stub, estilo um componente.</li>
 <li>O sistema de componentes fornece um meta-objeto para reflexão.</li>
 </ul>
@@ -231,7 +229,7 @@ See the
 <a href='https://github.com/libcoral/coral/blob/master/LICENSE.md'>Coral License</a>
 for details.
 <br />
-Updated on Nov 11 2010.
+Updated on Nov 13 2010.
 </p>
 </div>
 <script type='text/javascript'>
@@ -251,5 +249,4 @@ Updated on Nov 11 2010.
 </script>
 
 </body>
-
 </html>
